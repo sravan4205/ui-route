@@ -1,0 +1,101 @@
+<!doctype html>
+<html ng-app="myapp">
+
+<head>
+  <title>AngularJS: UI-Router Quick Start</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li ui-sref-active="active"><a ui-sref="route1">Route 1</a>
+          </li>
+          <li ui-sref-active="active"><a ui-sref="route2">Route 2</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+
+  <div class="col-md-12" ui-view></div>
+
+  <!-- Angular -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
+  <!-- UI-Router -->
+  <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+
+  <!-- App Script -->
+  <script>
+    var myapp = angular.module('myapp', ["ui.router"])
+     myapp.config(function($stateProvider, $urlRouterProvider) {
+
+      // For any unmatched url, send to /route1
+      $urlRouterProvider.otherwise("/route1")
+
+      $stateProvider
+        .state('route1', {
+          url: "/route1",
+          templateUrl: "route1.html",
+          controller: function($scope, $state) {
+            $scope.items = ["item1", "item2"];
+            $state.go('route1.dashboard');
+          }
+        })
+        .state('route1.dashboard', {
+          url: "/dashboard",
+          templateUrl: "dashboard.html"
+        })
+        .state('route1.item1', {
+          url: "/item1",
+          templateUrl: "item1.html"
+        })
+        .state('route1.item2', {
+          url: "/item2",
+          templateUrl: "item2.html"
+        })
+
+      .state('route2', {
+        url: "/route2",
+          templateUrl: "route1.html",
+          controller: function($scope, $state) {
+            $scope.items = ["item3", "item4"];
+            $state.go('route2.dashboard');
+          }
+      })
+        .state('route2.dashboard', {
+          url: "/dashboard",
+          templateUrl: "dashboard.html"
+        })
+        .state('route2.item3', {
+          url: "/item3",
+          templateUrl: "item3.html"
+        })
+        .state('route2.item4', {
+          url: "/item4",
+          templateUrl: "item4.html"
+        })
+        
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-2">
+      <ul class="list-group">
+          <a ui-sref-active="active" class="list-group-item" ng-repeat="item in items" ui-sref=".{{item}}">{{item}}</a>
+      </ul>
+    </div>
+    <div class="col-md-10 well">
+      <div ui-view><h1>Dashboard</h1></div>
+    </div>
+  </div>
+</div>
+
